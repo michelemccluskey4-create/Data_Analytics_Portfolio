@@ -1,0 +1,512 @@
+
+
+Import data from first file
+
+DailyActivity_312_411 <- read_csv(“/kaggle/input/fitbit/mturkfitbit_export_3.12.16-4.11.16/Fitabase Data 3.12.16-4.11.16/dailyActivity_merged.csv”)
+Heartrate_312_411 <- read_csv(“/kaggle/input/fitbit/mturkfitbit_export_3.12.16-4.11.16/Fitabase Data 3.12.16-4.11.16/heartrate_seconds_merged.csv”)
+Calories_Hourly_312_411 <- read_csv(“/kaggle/input/fitbit/mturkfitbit_export_3.12.16-4.11.16/Fitabase Data 3.12.16-4.11.16/hourlyCalories_merged.csv”)
+Intensities_Hourly_312_411 <- read_csv(“/kaggle/input/fitbit/mturkfitbit_export_3.12.16-4.11.16/Fitabase Data 3.12.16-4.11.16/hourlyIntensities_merged.csv”)
+Steps_Hourly_312_411 <- read_csv(“/kaggle/input/fitbit/mturkfitbit_export_3.12.16-4.11.16/Fitabase Data 3.12.16-4.11.16/hourlySteps_merged.csv”)
+Calories_Minutes_312_411 <- read_csv(“/kaggle/input/fitbit/mturkfitbit_export_3.12.16-4.11.16/Fitabase Data 3.12.16-4.11.16/minuteCaloriesNarrow_merged.csv”)
+Intensities_Minutes_312_411 <- read_csv(“/kaggle/input/fitbit/mturkfitbit_export_3.12.16-4.11.16/Fitabase Data 3.12.16-4.11.16/minuteIntensitiesNarrow_merged.csv”)
+Mets_Minutes_312_411 <- read_csv(“/kaggle/input/fitbit/mturkfitbit_export_3.12.16-4.11.16/Fitabase Data 3.12.16-4.11.16/minuteMETsNarrow_merged.csv”)
+Sleep_Minutes_312_411 <- read_csv(“/kaggle/input/fitbit/mturkfitbit_export_3.12.16-4.11.16/Fitabase Data 3.12.16-4.11.16/minuteSleep_merged.csv”)
+Steps_Minutes_Narrow_312_411 <- read_csv(“/kaggle/input/fitbit/mturkfitbit_export_3.12.16-4.11.16/Fitabase Data 3.12.16-4.11.16/minuteStepsNarrow_merged.csv”)
+Weight_312_411 <- read_csv(“/kaggle/input/fitbit/mturkfitbit_export_3.12.16-4.11.16/Fitabase Data 3.12.16-4.11.16/weightLogInfo_merged.csv”)
+
+Import data from second file
+
+DailyActivity_412_512 <- read_csv(“/kaggle/input/fitbit/mturkfitbit_export_4.12.16-5.12.16/Fitabase Data 4.12.16-5.12.16/dailyActivity_merged.csv”)
+Calories_Daily_412_512 <- read_csv(“/kaggle/input/fitbit/mturkfitbit_export_4.12.16-5.12.16/Fitabase Data 4.12.16-5.12.16/dailyCalories_merged.csv”)
+Intensities_Daily_412_512 <- read_csv(“/kaggle/input/fitbit/mturkfitbit_export_4.12.16-5.12.16/Fitabase Data 4.12.16-5.12.16/dailyIntensities_merged.csv”)
+Steps_Daily_412_512 <- read_csv(“/kaggle/input/fitbit/mturkfitbit_export_4.12.16-5.12.16/Fitabase Data 4.12.16-5.12.16/dailySteps_merged.csv”)
+Heartrate_412_512 <- read_csv(“/kaggle/input/fitbit/mturkfitbit_export_4.12.16-5.12.16/Fitabase Data 4.12.16-5.12.16/heartrate_seconds_merged.csv”)
+Calories_Hourly_412_512 <- read_csv(“/kaggle/input/fitbit/mturkfitbit_export_4.12.16-5.12.16/Fitabase Data 4.12.16-5.12.16/hourlyCalories_merged.csv”)
+Intensities_Hourly_412_512 <- read_csv(“/kaggle/input/fitbit/mturkfitbit_export_4.12.16-5.12.16/Fitabase Data 4.12.16-5.12.16/hourlyIntensities_merged.csv”)
+Steps_Hourly_412_512 <- read_csv(“/kaggle/input/fitbit/mturkfitbit_export_4.12.16-5.12.16/Fitabase Data 4.12.16-5.12.16/hourlySteps_merged.csv”)
+Calories_Minutes_Narrow_412_512 <- read_csv(“/kaggle/input/fitbit/mturkfitbit_export_4.12.16-5.12.16/Fitabase Data 4.12.16-5.12.16/minuteCaloriesNarrow_merged.csv”)
+Calories_Minutes_Wide_412_512 <- read_csv(“/kaggle/input/fitbit/mturkfitbit_export_4.12.16-5.12.16/Fitabase Data 4.12.16-5.12.16/minuteCaloriesWide_merged.csv”)
+Intensities_Minutes_Narrow_412_512 <- read_csv(“/kaggle/input/fitbit/mturkfitbit_export_4.12.16-5.12.16/Fitabase Data 4.12.16-5.12.16/minuteIntensitiesNarrow_merged.csv”)
+Intensities_Minutes_Wide_412_512 <- read_csv(“/kaggle/input/fitbit/mturkfitbit_export_4.12.16-5.12.16/Fitabase Data 4.12.16-5.12.16/minuteIntensitiesWide_merged.csv”)
+Mets_Minutes_412_512 <- read_csv(“/kaggle/input/fitbit/mturkfitbit_export_4.12.16-5.12.16/Fitabase Data 4.12.16-5.12.16/minuteMETsNarrow_merged.csv”)
+Sleep_Minutes_412_512 <- read_csv(“/kaggle/input/fitbit/mturkfitbit_export_4.12.16-5.12.16/Fitabase Data 4.12.16-5.12.16/minuteSleep_merged.csv”)
+Steps_Minutes_Narrow_412_512 <- read_csv(“/kaggle/input/fitbit/mturkfitbit_export_4.12.16-5.12.16/Fitabase Data 4.12.16-5.12.16/minuteStepsNarrow_merged.csv”)
+Sleep_Minutes_Wide_412_512 <- read_csv(“/kaggle/input/fitbit/mturkfitbit_export_4.12.16-5.12.16/Fitabase Data 4.12.16-5.12.16/minuteStepsWide_merged.csv”)
+Sleep_Day_412_512 <- read_csv(“/kaggle/input/fitbit/mturkfitbit_export_4.12.16-5.12.16/Fitabase Data 4.12.16-5.12.16/sleepDay_merged.csv”)
+Weight_412_512 <- read_csv(“/kaggle/input/fitbit/mturkfitbit_export_4.12.16-5.12.16/Fitabase Data 4.12.16-5.12.16/weightLogInfo_merged.csv”)
+
+Combine equivalent tables and remove duplicate records
+
+Daily_All <- bind_rows(DailyActivity_312_411, DailyActivity_412_512) %>% distinct()
+
+Heartrate_All <- bind_rows(Heartrate_312_411, Heartrate_412_512) %>% distinct()
+
+Calories_Hourly_All <- bind_rows(Calories_Hourly_312_411, Calories_Hourly_412_512) %>% distinct()
+
+Intensities_Hourly_All <- bind_rows(Intensities_Hourly_312_411, Intensities_Hourly_412_512) %>% distinct()
+
+Steps_Hourly_All <- bind_rows(Steps_Hourly_312_411, Steps_Hourly_412_512) %>% distinct()
+
+Calories_Minutes_Narrow_All <- bind_rows(Calories_Minutes_312_411, Calories_Minutes_Narrow_412_512) %>% distinct()
+
+Intensities_Minutes_Narrow_All <- bind_rows(Intensities_Minutes_312_411, Intensities_Minutes_Narrow_412_512) %>% distinct()
+
+Mets_Minutes_All <- bind_rows(Mets_Minutes_312_411, Mets_Minutes_412_512) %>% distinct()
+
+Sleep_Minutes_All <- bind_rows(Sleep_Minutes_312_411, Sleep_Minutes_412_512) %>% distinct()
+
+Steps_Minutes_Narrow_All <- bind_rows(Steps_Minutes_Narrow_312_411, Steps_Minutes_Narrow_412_512) %>% distinct()
+
+Weight_All <- bind_rows(Weight_312_411, Weight_412_512) %>% distinct()
+
+#Look for missing data/na’s
+Weight_All%>%
+summarise(across(everything(), ~ sum(is.na(.))))
+
+#Clean data,fix dates, remove empty columns or rows
+Daily_All_Clean <- Daily_All %>%
+clean_names() %>%
+remove_empty(“rows”) %>%
+remove_empty(“cols”) %>%
+mutate(activity_date = mdy(activity_date))%>%
+select(-‘logged_activities_distance’)
+
+Heartrate_All_Clean <- Heartrate_All %>%
+clean_names() %>%
+remove_empty(“rows”) %>%
+remove_empty(“cols”) %>%
+mutate(time = mdy_hms(time))
+
+Calories_Hourly_All_Clean <- Calories_Hourly_All %>%
+clean_names() %>%
+remove_empty(“rows”) %>%
+remove_empty(“cols”) %>%
+mutate(activity_hour = mdy_hms(activity_hour))
+
+Intensities_Hourly_All_Clean <- Intensities_Hourly_All %>%
+clean_names() %>%
+remove_empty(“rows”) %>%
+remove_empty(“cols”) %>%
+mutate(activity_hour = mdy_hms(activity_hour))
+
+Steps_Hourly_All_Clean <- Steps_Hourly_All %>%
+clean_names() %>%
+remove_empty(“rows”) %>%
+remove_empty(“cols”) %>%
+mutate(activity_hour = mdy_hms(activity_hour))
+
+Calories_Minutes_Narrow_All_Clean <- Calories_Minutes_Narrow_All %>%
+clean_names() %>%
+remove_empty(“rows”) %>%
+remove_empty(“cols”) %>%
+mutate(activity_minute = mdy_hms(activity_minute))
+
+Intensities_Minutes_Narrow_All_Clean <- Intensities_Minutes_Narrow_All %>%
+clean_names() %>%
+remove_empty(“rows”) %>%
+remove_empty(“cols”) %>%
+mutate(activity_minute = mdy_hms(activity_minute))
+
+Mets_Minutes_All_Clean <- Mets_Minutes_All %>%
+clean_names() %>%
+remove_empty(“rows”) %>%
+remove_empty(“cols”) %>%
+mutate(activity_minute = mdy_hms(activity_minute)) %>%
+rename(mets = me_ts)
+
+Sleep_Minutes_All_Clean <- Sleep_Minutes_All %>%
+clean_names() %>%
+remove_empty(“rows”) %>%
+remove_empty(“cols”) %>%
+mutate(date = mdy_hms(date))
+
+Steps_Minutes_Narrow_All_Clean <- Steps_Minutes_Narrow_All %>%
+clean_names() %>%
+remove_empty(“rows”) %>%
+remove_empty(“cols”) %>%
+mutate(activity_minute = mdy_hms(activity_minute))
+
+Weight_All_Clean <- Weight_All %>%
+clean_names() %>%
+remove_empty(“rows”) %>%
+remove_empty(“cols”) %>%
+mutate(date = mdy_hms(date))%>%
+select(-‘fat’)
+
+Sleep_Day_412_512_Clean <- Sleep_Day_412_512 %>%
+clean_names() %>%
+remove_empty(“rows”) %>%
+remove_empty(“cols”) %>%
+mutate(sleep_day = mdy_hms(sleep_day))
+
+Sleep_Minutes_Wide_412_512_Clean <- Sleep_Minutes_Wide_412_512 %>%
+clean_names() %>%
+remove_empty(“rows”) %>%
+remove_empty(“cols”) %>%
+mutate(activity_hour = mdy_hms(activity_hour))
+
+Calories_Daily_412_512_Clean <- Calories_Daily_412_512 %>%
+clean_names() %>%
+remove_empty(“rows”) %>%
+remove_empty(“cols”) %>%
+mutate(activity_day = mdy(activity_day))
+
+Intensities_Daily_412_512_Clean <- Intensities_Daily_412_512 %>%
+clean_names() %>%
+remove_empty(“rows”) %>%
+remove_empty(“cols”) %>%
+mutate(activity_day = mdy(activity_day))
+
+Steps_Daily_412_512_Clean <- Steps_Daily_412_512 %>%
+clean_names() %>%
+remove_empty(“rows”) %>%
+remove_empty(“cols”) %>%
+mutate(activity_day = mdy(activity_day))
+
+Calories_Minutes_Wide_412_512_Clean <- Calories_Minutes_Wide_412_512 %>%
+clean_names() %>%
+remove_empty(“rows”) %>%
+remove_empty(“cols”) %>%
+mutate(activity_hour = mdy_hms(activity_hour))
+
+Intensities_Minutes_Wide_412_512_Clean <- Intensities_Minutes_Wide_412_512 %>%
+clean_names() %>%
+remove_empty(“rows”) %>%
+remove_empty(“cols”) %>%
+mutate(activity_hour = mdy_hms(activity_hour))
+
+head() and skim() functions
+
+head(Daily_All_Clean)
+
+skim(Daily_All_Clean)
+
+#create table for day of week activity with avg steps and calories
+DOW_Activity <- Daily_All_Clean %>%
+mutate(day_of_week = wday(activity_date, label = TRUE, abbr = FALSE)) %>%
+group_by(day_of_week) %>%
+summarise(
+avg_total_steps = mean(total_steps, na.rm = TRUE),
+avg_calories = mean(calories, na.rm = TRUE)
+)
+
+#column charts
+ggplot(DOW_Activity, aes(x = day_of_week, y = avg_total_steps)) +
+geom_col() +
+labs(
+title = “Average Daily Steps by Day of Week”,
+x = “Day of Week”,
+y = “Average Total Steps”
+)
+
+ggplot(DOW_Activity, aes(x = day_of_week, y = avg_calories)) +
+geom_col() +
+labs(
+title = “Average Calories by Day of Week”,
+x = “Day of Week”,
+y = “Average Calories”
+)
+
+#Join tables together to show hourly activity
+Hourly_Activity <- Intensities_Hourly_All_Clean %>%
+left_join(Calories_Hourly_All_Clean,
+by = c(“id”, “activity_hour”)) %>%
+left_join(Steps_Hourly_All_Clean,
+by = c(“id”, “activity_hour”))
+
+#Line chart showing activity by hour
+Hourly_Activity %>%
+mutate(hour = hour(activity_hour)) %>%
+group_by(hour) %>%
+summarise(avg_steps = mean(step_total, na.rm = TRUE)) %>%
+ggplot(aes(x = hour, y = avg_steps)) +
+geom_line() +
+geom_point() +
+labs(
+title = “Average Steps by Hour of Day”,
+x = “Hour of day”,
+y = “Average steps”
+)
+
+#Faceted line chart showing activity by hour for each day of the week
+Hourly_Activity %>%
+mutate(weekday = wday(activity_hour, label = TRUE, abbr = FALSE), hour = hour(activity_hour)) %>%
+group_by(weekday, hour) %>%
+summarise(avg_steps = mean(step_total, na.rm = TRUE), .groups = “drop”) %>%
+ggplot(aes(x = hour, y = avg_steps, group = weekday)) +
+geom_line() +
+geom_point() +
+facet_wrap(~ weekday, ncol = 2) +
+labs(
+title = “Average Steps by Hour for Each Day of the Week”,
+x = “Hour of day”,
+y = “Average steps”
+)
+
+#Scatter chart showing correlation between steps and calories
+ggplot(Hourly_Activity, aes(x = step_total, y = calories, color = total_intensity)) +
+geom_point() +
+labs(
+title = “Calories vs Steps by Hour”,
+x = “Steps per hour”,
+y = “Calories per hour”,
+color = “Total intensity”
+)
+
+Daily_All_Clean %>%
+summarise(unique_ids = n_distinct(id))
+A tibble: 1 × 1
+unique_ids
+
+35
+
+#Created utilization table listing service and count of users
+Utilization_By_Service <- bind_rows(
+Daily_All_Clean %>%
+summarise(service = “daily”, users = n_distinct(id)),
+Heartrate_All_Clean %>%
+summarise(service = “heartrate”, users = n_distinct(id)),
+Calories_Hourly_All_Clean %>%
+summarise(service = “calories_hourly”, users = n_distinct(id)),
+Intensities_Hourly_All_Clean %>%
+summarise(service = “intensity_hourly”, users = n_distinct(id)),
+Steps_Hourly_All_Clean %>%
+summarise(service = “steps_hourly”, users = n_distinct(id)),
+Calories_Minutes_Narrow_All_Clean %>%
+summarise(service = “calories_minute_narrow”, users = n_distinct(id)),
+Intensities_Minutes_Narrow_All_Clean %>%
+summarise(service = “intensity_minute_narrow”, users = n_distinct(id)),
+Mets_Minutes_All_Clean %>%
+summarise(service = “mets_minute”, users = n_distinct(id)),
+Sleep_Minutes_All_Clean %>%
+summarise(service = “sleep_minute”, users = n_distinct(id)),
+Steps_Minutes_Narrow_All_Clean %>%
+summarise(service = “steps_minute_narrow”, users = n_distinct(id)),
+Weight_All_Clean %>%
+summarise(service = “weight”, users = n_distinct(id)),
+Sleep_Day_412_512_Clean %>%
+summarise(service = “sleep_day”, users = n_distinct(id)),
+Sleep_Minutes_Wide_412_512_Clean %>%
+summarise(service = “sleep_minutes_wide”, users = n_distinct(id)),
+Calories_Daily_412_512_Clean %>%
+summarise(service = “calories_daily”, users = n_distinct(id)),
+Intensities_Daily_412_512_Clean %>%
+summarise(service = “intensity_daily”, users = n_distinct(id)),
+Steps_Daily_412_512_Clean %>%
+summarise(service = “steps_daily”, users = n_distinct(id)),
+Calories_Minutes_Wide_412_512_Clean %>%
+summarise(service = “calories_minutes_wide”, users = n_distinct(id)),
+Intensities_Minutes_Wide_412_512_Clean %>%
+summarise(service = “intensity_minutes_wide”, users = n_distinct(id))
+)
+
+#Chart showing how many use each service
+ggplot(Utilization_By_Service,
+aes(x = users, y = service, fill = service)) +
+geom_col() +
+labs(
+title = “Utilization by Service”,
+x = “Number of Users”,
+y = “Service Logged”,
+fill = “Service”
+)
+
+Create usage flag
+
+daily_users <- Daily_All_Clean %>%
+distinct(id) %>%
+mutate(use_daily = 1)
+
+heartrate_users <- Heartrate_All_Clean %>%
+distinct(id) %>%
+mutate(use_heartrate = 1)
+
+weight_users <- Weight_All_Clean %>%
+distinct(id) %>%
+mutate(use_weight = 1)
+
+sleep_users <- Sleep_Day_412_512_Clean %>%
+distinct(id) %>%
+mutate(use_sleep = 1)
+
+steps_hourly_users <- Steps_Hourly_All_Clean %>%
+distinct(id) %>%
+mutate(use_steps_hourly = 1)
+
+#Average daily steps per user
+steps_by_id <- Daily_All_Clean %>%
+group_by(id) %>%
+summarise(
+avg_daily_steps = mean(total_steps, na.rm = TRUE)
+)
+
+#Average hourly calories per user
+calories_by_id <- Calories_Hourly_All_Clean %>%
+group_by(id) %>%
+summarise(
+avg_hourly_calories = mean(calories, na.rm = TRUE),
+.groups = “drop”
+)
+
+#Join tables
+service_by_id <- Daily_All_Clean %>%
+distinct(id) %>%
+left_join(daily_users, by = “id”) %>%
+left_join(heartrate_users, by = “id”) %>%
+left_join(weight_users, by = “id”) %>%
+left_join(sleep_users, by = “id”) %>%
+left_join(steps_hourly_users, by = “id”)
+
+#Add steps to steps service table
+service_by_id_steps <- service_by_id %>%
+left_join(steps_by_id, by = “id”)
+
+#Add calories to calories service table
+service_by_id_cal <- service_by_id %>%
+left_join(calories_by_id, by = “id”)
+
+#Convert NA’s to 0’s
+service_by_id_steps <- service_by_id_steps %>%
+mutate(across(starts_with(“use_”), ~ if_else(is.na(.), 0L, .)))
+service_by_id_cal <- service_by_id_cal %>%
+mutate(across(starts_with(“use_”), ~ if_else(is.na(.), 0L, .)))
+
+write.csv(service_by_id_steps, “/kaggle/working/service_by_id_steps.csv”, row.names = FALSE)
+
+service_by_id_steps %>%
+mutate(use_weight = factor(use_weight, labels = c(“No Weight Log”, “Weight Log”))) %>%
+group_by(use_weight) %>%
+summarise(avg_daily_steps = mean(avg_daily_steps, na.rm = TRUE)) %>%
+ggplot(aes(x = use_weight, y = avg_daily_steps, fill = use_weight)) +
+geom_col() +
+labs(
+title = “Daily Steps by Weight Logging Behavior”,
+x = “Weight Logging”,
+y = “Average Daily Steps”,
+fill = “Weight Log Use”
+)
+
+pct_diff <- service_by_id_steps %>%
+mutate(use_weight = factor(use_weight, labels = c(“No Weight Log”, “Weight Log”))) %>%
+group_by(use_weight) %>%
+summarise(avg_daily_steps = mean(avg_daily_steps, na.rm = TRUE)) %>%
+mutate( pct_diff_from_no_log =
+(avg_daily_steps - avg_daily_steps[use_weight == “No Weight Log”]) /
+avg_daily_steps[use_weight == “No Weight Log”] * 100
+)
+View(pct_diff)
+A tibble: 2 × 3
+use_weight avg_daily_steps pct_diff_from_no_log
+  
+No Weight Log 6612.892 0.00000
+Weight Log 7606.941 15.03198
+No description has been provided for this image
+service_by_id_steps %>%
+mutate(use_heartrate = factor(use_heartrate, labels = c(“No Heartrate Log”, “Heartrate Log”))) %>%
+group_by(use_heartrate) %>%
+summarise(avg_daily_steps = mean(avg_daily_steps, na.rm = TRUE)) %>%
+ggplot(aes(x = use_heartrate, y = avg_daily_steps, fill = use_heartrate)) +
+geom_col() +
+labs(
+title = “Daily Steps by Heartrate Logging Behavior”,
+x = “Heartrate Logging”,
+y = “Average Daily Steps”,
+fill = “Heartrate Log Use”
+)
+
+pct_diff <- service_by_id_steps %>%
+mutate(use_heartrate = factor(use_heartrate, labels = c(“No Heartrate Log”, “Heartrate Log”))) %>%
+group_by(use_heartrate) %>%
+summarise(avg_daily_steps = mean(avg_daily_steps, na.rm = TRUE)) %>%
+mutate( pct_diff_from_no_log =
+(avg_daily_steps - avg_daily_steps[use_heartrate == “No Heartrate Log”]) /
+avg_daily_steps[use_heartrate == “No Heartrate Log”] * 100
+)
+
+service_by_id_steps %>%
+mutate(use_sleep = factor(use_sleep, labels = c(“No Sleep Log”, “Sleep Log”))) %>%
+group_by(use_sleep) %>%
+summarise(avg_daily_steps = mean(avg_daily_steps, na.rm = TRUE)) %>%
+ggplot(aes(x = use_sleep, y = avg_daily_steps, fill = use_sleep)) +
+geom_col() +
+labs(
+title = “Daily Steps by Sleep Logging Behavior”,
+x = “Sleep Logging”,
+y = “Average Daily Steps”,
+fill = “Sleep Log Use”
+)
+
+pct_diff <- service_by_id_steps %>%
+mutate(use_sleep = factor(use_sleep, labels = c(“No Sleep Log”, “Sleep Log”))) %>%
+group_by(use_sleep) %>%
+summarise(avg_daily_steps = mean(avg_daily_steps, na.rm = TRUE)) %>%
+mutate( pct_diff_from_no_log =
+(avg_daily_steps - avg_daily_steps[use_sleep == “No Sleep Log”]) /
+avg_daily_steps[use_sleep == “No Sleep Log”] * 100
+)
+
+service_by_id_cal %>%
+mutate(use_sleep = factor(use_sleep, labels = c(“No Sleep Log”, “Sleep Log”)), avg_daily_calories = avg_hourly_calories * 24) %>%
+group_by(use_sleep) %>%
+summarise(avg_daily_calories = mean(avg_daily_calories, na.rm = TRUE)) %>%
+ggplot(aes(x = use_sleep, y = avg_daily_calories, fill = use_sleep)) +
+geom_col() +
+labs(
+title = “Daily Calories by Sleep Logging Behavior”,
+x = “Sleep Logging”,
+y = “Average Daily Calories”,
+fill = “Sleep Log Use”
+)
+
+pct_diff <- service_by_id_cal %>%
+mutate(use_sleep = factor(use_sleep, labels = c(“No Sleep Log”, “Sleep Log”)), avg_daily_calories = avg_hourly_calories * 24) %>%
+group_by(use_sleep) %>%
+summarise(avg_daily_calories = mean(avg_daily_calories, na.rm = TRUE)) %>%
+mutate(pct_diff_from_no_log =
+(avg_daily_calories - avg_daily_calories[use_sleep == “No Sleep Log”]) /
+avg_daily_calories[use_sleep == “No Sleep Log”] * 100
+)
+
+service_by_id_cal %>%
+mutate(use_weight = factor(use_weight, labels = c(“No Weight Log”, “Weight Log”)), avg_daily_calories = avg_hourly_calories * 24) %>%
+group_by(use_weight) %>%
+summarise(avg_daily_calories = mean(avg_daily_calories, na.rm = TRUE)) %>%
+ggplot(aes(x = use_weight, y = avg_daily_calories, fill = use_weight)) +
+geom_col() +
+labs(
+title = “Daily Calories by Weight Logging Behavior”,
+x = “Weight Logging”,
+y = “Average Daily Calories”,
+fill = “Weight Log Use”
+)
+
+pct_diff <- service_by_id_cal %>%
+mutate(use_weight = factor(use_weight, labels = c(“No Weight Log”, “Weight Log”)), avg_daily_calories = avg_hourly_calories * 24) %>%
+group_by(use_weight) %>%
+summarise(avg_daily_calories = mean(avg_daily_calories, na.rm = TRUE)) %>%
+mutate(pct_diff_from_no_log =
+(avg_daily_calories - avg_daily_calories[use_weight == “No Weight Log”]) /
+avg_daily_calories[use_weight == “No Weight Log”] * 100
+)
+
+service_by_id_cal %>%
+mutate(use_heartrate = factor(use_heartrate, labels = c(“No Heartrate Log”, “Heartrate Log”)), avg_daily_calories = avg_hourly_calories * 24) %>%
+group_by(use_heartrate) %>%
+summarise(avg_daily_calories = mean(avg_daily_calories, na.rm = TRUE)) %>%
+ggplot(aes(x = use_heartrate, y = avg_daily_calories, fill = use_heartrate)) +
+geom_col() +
+labs(
+title = “Daily Calories by Weight Logging Behavior”,
+x = “Weight Logging”,
+y = “Average Daily Calories”,
+fill = “Weight Log Use”
+)
+
+pct_diff <- service_by_id_cal %>%
+mutate(use_heartrate = factor(use_heartrate, labels = c(“No Heartrate Log”, “Heartrate Log”)), avg_daily_calories = avg_hourly_calories * 24) %>%
+group_by(use_heartrate) %>%
+summarise(avg_daily_calories = mean(avg_daily_calories, na.rm = TRUE)) %>%
+mutate( pct_diff_from_no_log =
+(avg_daily_calories - avg_daily_calories[use_heartrate == “No Heartrate Log”]) /
+avg_daily_calories[use_heartrate == “No Heartrate Log”] * 100
+)

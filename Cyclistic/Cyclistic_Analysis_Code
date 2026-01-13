@@ -1,0 +1,229 @@
+#impor libraries
+library(tidyverse)
+library(janitor)
+library(skimr)
+library(scales)
+
+#upload data
+Station_Data <- read_csv ("/kaggle/input/station-data/Station_Data.csv")
+rider_list <- read_csv ("/kaggle/input/rider-list/rider_list.csv")
+
+# identifying missing data
+Station_Data %>% 
+  summarise(across(everything(), ~ sum(is.na(.))))
+
+#changing data types
+Station_Data <- Station_Data %>%
+  mutate(
+    rideable_type = as.factor(rideable_type),
+    member_casual = as.factor(member_casual),
+    start_station_id = as.integer(as.factor(start_station_id)),  
+    end_station_id = as.integer(as.factor(end_station_id))) 
+
+#table with NA's dropped
+Trips_station <- Station_Data %>%
+  mutate(
+    started_at = ymd_hms(started_at),
+    ended_at   = ymd_hms(ended_at),
+    ride_length = as.numeric(difftime(ended_at, started_at, units = "mins"))) %>%
+  mutate(start_station_name = str_trim(start_station_name, side = "both"),
+    end_station_name = str_trim(end_station_name, side = "both")) %>%
+  filter(
+    !is.na(started_at),
+    !is.na(ended_at),
+    ride_length > 0)
+
+summary(Trips_station$started_at)
+summary(Trips_station$ride_length)
+
+#member type comparison
+member_counts <- Trips_station %>%
+  count(member_casual) %>%
+  mutate(percent = n / sum(n) * 100)
+
+pie(member_counts$n, 
+  labels = paste0(member_counts$member_casual,
+  " (", round(member_counts$percent, 1), "%)"),
+  main = "Rider Type Distribution", 
+  col = rainbow(nrow(member_counts)))
+
+  ggplot(member_counts, aes(x = member_casual, y = percent, fill = member_casual)) +
+  geom_bar(stat = "identity") +
+  labs(
+    y = "Percent of rides",
+    fill = "Rider Type")
+
+#bike type comparison
+ride_type_summary <- Trips_station %>%
+  group_by(member_casual, rideable_type) %>%
+  summarise(n = n(), .groups = "drop_last") %>%
+  mutate(pct_within_rider = 100 * n / sum(n)) %>%
+  ungroup()
+View(ride_type_summary)
+
+ggplot(ride_type_summary, aes(x = rideable_type, y = pct_within_rider, fill = member_casual)) +
+  geom_col(position = "dodge") +
+  scale_y_continuous(labels = label_number(accuracy = 1)) +
+  labs(
+    title = "Percentage of Trips by Rider and Bike Type",
+    x     = "Bike Type",
+    y     = "Percent of Trips",
+    fill  = "Rider Type")
+
+#parsing dates
+Trips_station <- Trips_station %>%
+  mutate(
+    date         = as.Date(started_at),
+    day_of_week  = wday(started_at, label = TRUE),
+    month        = month(started_at, label = TRUE))
+
+    ride_type_day <- Trips_station %>%
+  group_by(member_casual, day_of_week) %>%
+  summarise(n = n(), .groups = "drop_last") %>%
+  mutate(pct_per_day = 100 * n / sum(n)) %>%
+  ungroup()
+View(ride_type_day)
+
+ggplot(ride_type_day, aes(x = day_of_week, y = pct_per_day, fill = member_casual)) +
+  geom_col(position = "dodge") +
+  scale_y_continuous(labels = label_number(accuracy = 1)) +
+  labs(
+    title = "Percentage of Trips by Day of the Week",
+    x     = "Day of the Week",
+    y     = "Percent of Trips",
+    fill  = "Rider Type")
+
+ride_type_month <- Trips_station %>%
+  group_by(member_casual, month) %>%
+  summarise(n = n(), .groups = "drop_last") %>%
+  mutate(pct_per_month = 100 * n / sum(n)) %>%
+  ungroup()
+View(ride_type_month)
+
+ggplot(ride_type_month, aes(x = month, y = pct_per_month, fill = member_casual)) +
+  geom_col(position = "dodge") +
+  scale_y_continuous(labels = label_number(accuracy = 1)) +
+  labs(
+    title = "Percentage of Trips by Month",
+    x     = "Month",
+    y     = "Percent of Trips",
+    fill  = "Rider Type")
+
+avg_ride_by_day <- Trips_station %>%
+  group_by(day_of_week, member_casual) %>%
+  summarise(avg_ride_length = mean(ride_length, na.rm = TRUE),.groups = "drop")
+
+ggplot(avg_ride_by_day,
+  aes(x = day_of_week, y = avg_ride_length, fill = member_casual)) +
+  geom_col(position = "dodge") +
+  labs(
+    title = "Average Trip Duration by Day & Membership",
+    x = "Day of Week",
+    y = "Average Trip Duration (minutes)",
+    fill = "Rider Type")
+
+#listing distinct stations for location data
+Trips_station %>%
+  summarise(num_start_stations = n_distinct(start_station_name))
+
+  top_start_stations <- Trips_station %>%
+  filter(!is.na(start_station_name)) %>%   
+  count(member_casual, start_station_name, name = "n") %>%
+  group_by(member_casual) %>%
+  slice_max(order_by = n, n = 10, with_ties = FALSE) %>%
+  mutate(pct_start_station = 100 * n / sum(n)) %>%
+  ungroup()
+
+View(top_start_stations)
+
+ggplot(top_start_stations,aes(x = reorder(start_station_name, n), y = pct_start_station, fill = member_casual)) +
+  geom_col(position = "dodge") +
+  coord_flip()+
+  labs(
+    title = "Percentage of Trips by Start Station",
+    x     = "Station",
+    y     = "Percent of Trips",
+    fill  = "Rider Type")
+
+top_end_stations <- Trips_station %>%
+  filter(!is.na(start_station_name)) %>%   
+  count(member_casual, start_station_name, name = "n") %>%
+  group_by(member_casual) %>%
+  slice_max(order_by = n, n = 10, with_ties = FALSE) %>%
+  mutate(pct_end_station = 100 * n / sum(n)) %>%
+  ungroup()
+
+View(top_end_stations)
+
+ggplot(top_end_stations, aes(x = reorder(start_station_name, n), y = pct_end_station, fill = member_casual)) +
+  geom_col(position = "dodge") +
+  coord_flip() +
+  labs(
+    title = "Percentage of Trips by End Station",
+    x     = "Station",
+    y     = "Percent of Trips",
+    fill  = "Rider Type")
+
+#demographic info
+rider_list <- rider_list %>% 
+  filter(member_casual != "Dependent") %>%
+  mutate( 
+      date = as.Date(start_time), 
+      day_of_week = wday(start_time, label = TRUE), 
+      month = month(start_time, label = TRUE), 
+      year = year(start_time),
+      hour_of_day = hour(start_time))
+
+member_by_gender <- rider_list %>%
+  filter(
+      !is.na(gender),
+      !is.na(member_casual)) %>%
+  count(member_casual, gender) %>% 
+  mutate(pct_of_total = 100 * n / sum(n)) %>%  
+  group_by(member_casual) %>%  
+  mutate(pct_within_type = 100 * n / sum(n)) %>%
+  ungroup()
+
+ggplot(member_by_gender, 
+  aes(x = member_casual, y= pct_within_type, fill = gender)) +
+  geom_bar(stat = "identity") +
+  labs(
+    title = "Rider gender distribution by membership type",
+    x = "Rider Type",
+    y = "Percentage",
+    fill = "Gender")
+
+member_by_birthyear <- rider_list %>%
+  filter(!is.na(birthyear))%>%
+  count(member_casual, birthyear) %>% 
+  group_by(member_casual) %>%                 
+  mutate(
+    pct_of_total = 100 * n / sum(n),
+    pct_within_type = 100 * n / sum(n)) %>%
+  slice_max(n, n = 5, with_ties = FALSE) %>% 
+  ungroup()
+
+View(member_by_birthyear)
+
+ageband <- rider_list %>%
+  mutate(
+    age = year - birthyear,
+    age_band = as.character(cut(
+      age,
+      breaks = c(0, 24, 34, 44, 54, 64, Inf),
+      labels = c("0–24", "25–34", "35–44", "45–54", "55–64", "65+"),
+      right = TRUE)))
+
+member_by_ageband <- ageband %>%
+  filter(!is.na(age_band)) %>%
+  count(member_casual, age_band) %>%
+  group_by(member_casual) %>%
+  mutate(pct_within_type = 100 * n / sum(n)) %>%
+  ungroup()
+
+member_by_ageband <- ageband %>%
+  filter(!is.na(age_band)) %>%
+  count(member_casual, age_band) %>%
+  group_by(member_casual) %>%
+  mutate(pct_within_type = 100 * n / sum(n)) %>%
+  ungroup()

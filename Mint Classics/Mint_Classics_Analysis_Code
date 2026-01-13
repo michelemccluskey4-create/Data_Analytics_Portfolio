@@ -1,0 +1,249 @@
+#Cleaning data- iterate through columns
+select 
+	count(*) AS TotalRows,
+    count(distinct productName) AS DistinctName,
+    sum(case when productName is null then 1 else 0 end) AS MissingName
+from products;
+
+
+# Evaluate stock in warehouses
+select
+	w.warehouseCode AS WarehouseCode,
+    w.warehouseName AS Warehouse,
+    w.warehousePctCap AS PercentCap,
+    p.productCode AS ProductCode,
+    p.productName AS Product,
+    p.quantityInStock AS TotalStock
+from 
+	products AS p
+    inner join warehouses AS w
+		on p.warehouseCode = w.warehouseCode
+where 
+    w.warehouseCode = 'd';
+    #Create new table
+create table ordered_vs_stock AS
+SELECT
+	w.warehouseCode AS WarehouseCode,
+	w.warehouseName AS Warehouse,
+	w.warehousePctCap AS PercentCap,
+	p.productCode AS ProductCode,
+	p.productName AS Product,
+	p.quantityInStock AS TotalStock,
+	coalesce(sum(od.quantityOrdered), 0) AS TotalOrders
+from products AS p
+	left join warehouses AS w
+		on p.warehouseCode = w.warehouseCode
+	left join orderdetails AS od
+		on od.productCode = p.productCode
+group by
+w.warehouseCode,
+w.warehouseName,
+w.warehousePctCap,
+p.productCode,
+p.productName,
+p.quantityInStock;
+
+# stock by category    
+select
+	p.productLine AS Category,
+    w.warehouseCode AS WarehouseCode,
+	sum(p.quantityInStock) AS TotalQuantity
+from products AS p
+	left join warehouses AS w
+		on p.warehouseCode = w.warehouseCode
+group by 
+    p.productLine,
+	w.warehouseCode
+order by WarehouseCode;
+
+# New table 
+
+create table aggregates AS 
+select
+    p.productCode   AS ProductCode,
+    p.productName   AS Product,
+    p.productLine AS Category, 
+    coalesce(sum(p.quantityInStock), 0) AS TotalStock,
+    coalesce(sum(od.quantityOrdered), 0) AS TotalOrders,
+    coalesce(avg(od.priceEach), 0.0) AS AvgSellingPrice,
+    avg(od.priceEach) - avg(p.buyPrice) AS AvgProfit,
+    coalesce(sum(od.quantityOrdered * od.priceEach), 0.0) AS TotalRevenue,
+	coalesce(sum(od.quantityOrdered * p.buyPrice), 0.0) AS TotalCost,
+    coalesce(sum(od.quantityOrdered * od.priceEach) - sum(od.quantityOrdered * p.buyPrice), 0.0) AS TotalProfit
+from 
+	products AS p
+	left join orderdetails AS od
+		on od.productCode = p.productCode
+	left join orders as o
+		on od.orderNumber = o.orderNumber
+	left join warehouses AS w
+	on p.warehouseCode = w.warehouseCode
+group by
+	p.productCode, 
+	p.productName, 
+    p.productLine;
+
+# Financial summary with months/years    
+with order_summary AS (
+select 
+	od.productCode,
+	year(o.orderDate) AS OrderYear,
+    month(o.orderDate) AS OrderMonth
+from orderdetails AS od
+	inner join orders AS o
+    on od.orderNumber = o.orderNumber
+group by
+	od.productCode,
+	year(o.orderDate),
+    month(o.orderDate))   
+    
+select
+    p.productCode AS ProductCode,
+    p.productName AS Product,
+    p.productLine AS Category, 
+    p.buyPrice AS CostPrice,
+	os.OrderYear AS OrderYear,
+    os.OrderMonth AS OrderMonth,
+	a.TotalStock AS TotalStock,
+	a.TotalOrders AS TotalOrders,
+    a.AvgSellingPrice AS AvgSellingPrice,
+    a.AvgProfit AS AvgProfit,
+    a.TotalRevenue AS TotalRevenue,
+	a.TotalCost AS TotalCost,
+    a.TotalProfit AS TotalProfit
+from 
+	products AS p
+	left join aggregates AS a
+		on a.productCode = p.productCode
+	left join order_summary AS os
+		on os.productCode = p.productCode;
+
+#Profit by Category 
+select
+	Category,
+    sum(TotalProfit) AS TotalProfit
+from 
+	aggregates
+group by Category
+order by 
+	Category;
+
+ 
+  #Lowest profit products
+select
+    Product,
+    TotalOrders, 
+    AvgSellingPrice,
+    AvgProfit,
+    TotalRevenue,
+	TotalCost,
+    TotalProfit
+from 
+	aggregates
+
+order by TotalProfit asc
+limit 20;
+
+ # Orders by month/year   
+select
+    p.productCode AS ProductCode,
+    p.productName AS Product,
+    year(o.orderDate) AS OrderYear,
+    month(o.orderDate) AS OrderMonth,
+    coalesce(sum(od.quantityOrdered), 0) AS TotalOrdered
+from 
+	products AS p
+	left join orderdetails AS od
+		on od.productCode = p.productCode
+	left join orders as o
+		on od.orderNumber = o.orderNumber
+group by
+	p.productCode, 
+	p.productName, 
+	year(o.orderDate),
+    month(o.orderDate)
+order by
+	p.productCode, 
+	year(o.orderDate);	
+
+#    Summary/Product
+select
+    p.productCode AS ProductCode,
+    p.productName AS Product,
+    p.buyPrice AS CostPrice,
+    p.quantityInStock AS TotalStock,
+    a.TotalOrders AS TotalOrders,
+    a.AvgSellingPrice AS AvgSellingPrice,
+    a.AvgProfit AS AvgProfit,
+    a.TotalRevenue AS TotalRevenue,
+	a.TotalCost AS TotalCost,
+    a.TotalProfit AS TotalProfit
+from 
+	products AS p
+	left join aggregates AS a
+		on a.productCode = p.productCode
+
+order by
+TotalProfit;    
+
+
+ #Sell Through%
+select
+    ProductCode,
+    Product,
+    TotalStock,
+    TotalOrders,
+    case 
+        when TotalStock + TotalOrders = 0 then null
+        else round(TotalOrders * 1.0 / (TotalStock + TotalOrders) * 100, 1)
+    end AS sell_through_pct_3yr
+from aggregates
+order by sell_through_pct_3yr desc; 
+
+#inventory turnover
+select
+    ProductCode,
+    Product,
+    Warehouse,
+    TotalStock,
+    TotalOrders,
+    case 
+        when TotalStock = 0 then null
+        else round(TotalOrders * 1.0 / TotalStock, 2)
+    end AS turnover_3yr_units
+from ordered_vs_stock
+order by turnover_3yr_units desc;
+
+# Rough Redistribution Plan- 86 units available total, North 28, South 25, East 33
+
+select
+	warehouseCode,
+    warehouseName,
+    warehousePctCap,
+    100 - warehousePctCap AS SpaceAvailable
+
+from
+warehouses 
+where warehouseName != 'West'
+group by
+	warehouseCode,
+    warehouseName,
+    warehousePctCap;
+		
+select
+	ProductCode,
+	Product, 
+    TotalStock,
+	round(TotalStock * 28/86, 2) AS MoveToNorth,
+    round(TotalStock * 25/86, 2)AS MoveToSouth,
+	round(TotalStock * 33/86, 2) AS MoveToEast
+from ordered_vs_stock
+where Warehouse = 'West'
+group by
+	ProductCode,
+    Product, 
+    TotalStock;    
+
+    
+
+       
