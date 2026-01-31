@@ -2,8 +2,13 @@
 Data analytics portfolio showcasing case studies using R, MySQL, Tableau, and Excel to clean data, analyze trends, and communicate business insights.
 
 # About Me
-I am an analytical, highly organized professional adept at translating complicated information into clear, actionable insights. My A.A. in Information Technology, complemented by a recent Google Data Analytics Professional Certificate, is supported by a history of empathetic problem solving, precise record keeping, and the ability to guide individuals through detailed processes. I confront challenges with both technical rigor and a human centered perspective, driven by a natural curiosity to understand systems and a methodical devotion to bringing projects to completion. Through portfolio case studies using SQL, R, Tableau, and spreadsheets, I focus on data cleaning and modeling, uncovering trends, and communicating results via concise visual stories and well documented workflows that bring attention to both technical skill and business impact. As a career-changing online learner, I balance academic work, self initiated analyses (including Kaggle style explorations), as well as team based projects that exhibit my ability to ask the right questions, choose appropriate methods, and present results that support data driven decisions for teams and clients.
+# Hi, I'm Michele 👋
 
+Aspiring data analyst and software developer from Bel Air, MD. Devoted mom to three amazing kids and living with my close knit family.
+
+Currently wrapping up my Bachelor's in Software Development at DeVry University and recently completed the Google Data Analytics Certificate on Coursera. Passionate about Python, R, SQL, Tableau, and turning data into insights—building my portfolio with Kaggle projects and real-world analysis.
+
+In my downtime, I knit, read copiously, and play Dress to Impress with my children. Open to collaborations and entry-level data roles! 🚀
 # Projects
 
 * #### Bellabeat *December 2025* (R – marketing usage trends)
