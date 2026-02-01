@@ -22,13 +22,13 @@ Analyzed smart‑device usage data for Bellabeat to discover patterns in activit
 * #### Cyclistic *December 2025* (R – marketing strategy)
 Explored historical bike‑share trip data to compare casual riders and annual members, identifying behavioral differences and proposing strategies to convert casual riders into members.​ <br>
   &emsp;&emsp;  * [Cyclistic Kaggle Notebook](https://www.kaggle.com/code/michelemccluskey4/cyclistic-case-study)<br>
-  &emsp;&emsp;  * [Download the Cyclistic case study](Cyclistic/Cyclystic Case Study.pdf) <br>
+  &emsp;&emsp;  * [Download the Cyclistic case study](Cyclistic/Cyclystic_Case_Study.pdf) <br>
   &emsp;&emsp;   * [Cyclistic Dataset](https://divvy-tripdata.s3.amazonaws.com/index.html) provided under the [Divvy Data License Agreement](https://divvybikes.com/data-license-agreement)
 
 
 * #### Online Sales Analysis *January 2026* (Excel)
 Conducted an end‑to‑end sales analysis in Excel using online transaction data, cleaning and aggregating metrics to highlight revenue trends, seasonal patterns, and high‑value customer segments.​ <br>
- &emsp;&emsp;   * [Online Sales Data Analysis](Online Sales Data_Study.pdf) <br>
+ &emsp;&emsp;   * [Online Sales Data Analysis](Online_Sales_Data_Study.pdf) <br>
  &emsp;&emsp;   * [Online Sales Dataset](https://www.kaggle.com/datasets/samruddhi4040/online-sales-data) — licensed under CC0 (public domain)
 
 
