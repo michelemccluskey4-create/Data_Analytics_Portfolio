@@ -8,7 +8,7 @@ Aspiring data analyst and software developer from Bel Air, MD. Devoted mom to th
 
 Currently wrapping up my Bachelor's in Software Development at DeVry University and recently completed the Google Data Analytics Certificate on Coursera. Passionate about Python, R, SQL, Tableau, and turning data into insights—building my portfolio with Kaggle projects and real-world analysis.
 
-In my downtime, I knit, read copiously, and play Dress to Impress with my children. Open to collaborations and entry-level data roles! 🚀
+In my downtime, I knit, read copiously, and play Dress to Impress with my children. Open to collaborations and entry level data roles! 🚀
 # Projects
 
 * #### Bellabeat *December 2025* (R – marketing usage trends)
@@ -41,6 +41,6 @@ Evaluated the feasibility of closing a warehouse and optimizing inventory by que
 #### Online Retail Data EDA *January 2026* (Python)
 This mini project is based on a LinkedIn challenge created by Karina Samsonova, a Data Science & Data Analytics Consultant/Freelancer. The goal of the analysis is to identify, for UK customers, which products are best sellers and when customers are most likely to make purchases.​<br>
   &emsp;&emsp;  * [Online Retail Data EDA Kaggle Notebook](https://www.kaggle.com/code/michelemccluskey4/online-retail-data-python-eda)<br>
-  &emsp;&emsp;  * [Download the Online Retail Data EDA case study](Online_Retail_Data_EDA/Onlin_Retail_Data_EDA.pdf) <br>
+  &emsp;&emsp;  * [Download the Online Retail Data EDA case study](Online_Retail_Data_EDA/Online_Retail_EDA.pdf) <br>
  &emsp;&emsp;   * [Online Retail Dataset](https://www.kaggle.com/datasets/vijayuv/onlineretail/code) — licensed under CC0 (public domain)
 
