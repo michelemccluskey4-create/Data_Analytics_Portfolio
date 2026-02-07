@@ -39,8 +39,9 @@ Evaluated the feasibility of closing a warehouse and optimizing inventory by que
 &emsp;&emsp;    * [Tableau Visuals](https://public.tableau.com/views/MintClassicCarModelsAnalysis/DistributionofStockbyCategory?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
 
 #### Online Retail Data EDA *January 2026* (Python)
-This mini project is based on a LinkedIn challenge created by Karina Samsonova, a Data Science & Data Analytics Consultant/Freelancer. The goal of the analysis is to identify, for UK customers, which products are best sellers and when customers are most likely to make purchases.​<br>
-  &emsp;&emsp;  * [Online Retail Data EDA Kaggle Notebook](https://www.kaggle.com/code/michelemccluskey4/online-retail-data-python-eda)<br>
+This mini project is based on a LinkedIn challenge created by Karina Samsonova, a Data Science & Data Analytics Consultant/Freelancer. The goal of the analysis is to identify, for UK customers, which products are best sellers and when customers are most likely to make purchases. Initially, this was done in Python, but for the fun of it, I ended up going back and performing the same analysis in R. ​<br>
+  &emsp;&emsp;  * [Online Retail Data Python EDA Kaggle Notebook](https://www.kaggle.com/code/michelemccluskey4/online-retail-data-python-eda)<br>
+    &emsp;&emsp;  * [Online Retail Data R EDA Kaggle Notebook](https://www.kaggle.com/code/michelemccluskey4/online-retail-data-r-eda)<br>
   &emsp;&emsp;  * [Download the Online Retail Data EDA case study](Online_Retail_Data_EDA/Online_Retail_EDA.pdf) <br>
  &emsp;&emsp;   * [Online Retail Dataset](https://www.kaggle.com/datasets/vijayuv/onlineretail/code) — licensed under CC0 (public domain)
 
